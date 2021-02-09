@@ -1,0 +1,50 @@
+{
+  "name": "ping_pong_ros",
+  "modules": [
+    "//apps/samples/ping_pong_ros:ping_components"
+  ],
+  "graph": {
+    "nodes": [
+      {
+        "name": "ping",
+        "components": [
+          {
+            "name": "message_ledger",
+            "type": "isaac::alice::MessageLedger"
+          },
+          {
+            "name": "ping",
+            "type": "isaac::rosbridge::Ping"
+          }
+        ]
+      },
+      {
+        "name": "pong",
+        "components": [
+          {
+            "name": "message_ledger",
+            "type": "isaac::alice::MessageLedger"
+          },
+          {
+            "name": "pong",
+            "type": "isaac::rosbridge::Pong"
+          }
+        ]
+      }
+    ],
+    "edges": [
+      {
+        "source": "ping/ping/ping",
+        "target": "pong/pong/trigger"
+      }
+    ]
+  },
+  "config": {
+    "ping" : {
+      "ping" : {
+        "tick_period" : "10Hz"
+      }
+    }
+    
+  }
+}
